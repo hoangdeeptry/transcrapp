@@ -1,6 +1,6 @@
 import os
 import random
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_file
 import speech_recognition as sr
 from model.stt import stt
 from flask_cors import CORS, cross_origin   
@@ -29,7 +29,9 @@ def index():
 
         os.remove("random.wav")
 
-    # return render_template('index.html', transcript=transcript)
+        with open('client/src/transcript.txt', 'w', encoding="utf-8") as f:
+            f.write(transcript)
+
     return transcript
 
 if __name__ == "__main__":
